@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>HUG 2027 — Program &amp; My Schedule</title>
+  <meta name="description" content="The International Symposium on Helicobacter and Upper Gastrointestinal Diseases (March 18–20, 2027, Hyatt Regency Incheon Paradise City)" />
+  <meta name="theme-color" content="#B80F49" />
+
+  <!-- PWA & iOS Home Screen Meta -->
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="HUG 2027" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <style>
+    :root {
+      --hug-crimson: #B80F49;
+      --hug-crimson-soft: #FDF0F4;
+      --hug-crimson-border: #F5C6D6;
+      --hug-navy: #162B5B;
+      --hug-navy-soft: #EDF1F8;
+      --hug-teal: #1A6D82;
+      --hug-green: #0F6A3B;
+      --hug-coral: #E66E51;
+      --hug-charcoal: #263238;
+      --hug-slate: #546E7A;
+      --hug-border: #E5E7EB;
+      --hug-bg: #F6F5F8;
+
+      /* Pastel Session Block Colors */
+      --pastel-crimson: #FDEEF3;
+      --pastel-green: #ECF7F0;
+      --pastel-navy: #EEF2FA;
+      --pastel-teal: #E9F6F8;
+      --pastel-yellow: #FFFDEB;
+      --pastel-purple: #F4EEF9;
+      --pastel-gray: #FFFFFF;
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: var(--hug-bg);
+      color: var(--hug-charcoal);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .app-shell {
+      max-width: 520px;
+      margin: 0 auto;
+      min-height: 100%;
+      background: var(--hug-bg);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 0 32px rgba(22, 43, 91, 0.06);
+    }
+
+    /* Sticky Top Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--hug-border);
+      padding-top: env(safe-area-inset-top);
+    }
+
+    .brand-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px 10px;
+      gap: 10px;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      cursor: pointer;
+    }
+
+    .brand-logo {
+      height: 22px;
+      width: auto;
+      display: block;
+    }
+
+    .brand-date-pill {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--hug-navy);
+      background: var(--hug-navy-soft);
+      padding: 3px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .lang-btn {
+      border: 1.5px solid var(--hug-crimson);
+      background: #FFFFFF;
+      color: var(--hug-crimson);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .lang-btn:active {
+      background: var(--hug-crimson);
+      color: #FFFFFF;
+    }
+
+    /* HUG Official Navy -> Crimson Accent Strip */
+    .sub-bar {
+      background: linear-gradient(90deg, #162B5B 0%, #B80F49 100%);
+      color: #FFFFFF;
+      padding: 10px 16px 12px;
+    }
+    .sub-bar.hidden { display: none; }
+
+    .page-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .page-subtitle {
+      font-size: 11.5px;
+      opacity: 0.92;
+      margin-top: 2px;
+    }
+
+    .search-box {
+      margin-top: 10px;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 9px 34px 9px 12px;
+      font-size: 13px;
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--hug-charcoal);
+      outline: none;
+    }
+    .search-input::placeholder { color: #78909C; }
+    .search-clear {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: #78909C;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px;
+      display: none;
+    }
+    .search-clear.visible { display: block; }
+
+    /* Install Banner */
+    .install-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--hug-crimson-soft);
+      border-bottom: 1px solid var(--hug-crimson-border);
+      padding: 9px 14px;
+      font-size: 12px;
+      color: var(--hug-charcoal);
+    }
+    .install-banner.show { display: flex; }
+    .install-btn {
+      background: var(--hug-crimson);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .install-close {
+      background: transparent;
+      border: none;
+      color: #78909C;
+      font-size: 15px;
+      padding: 2px 4px;
+      cursor: pointer;
+    }
+
+    /* Day Tabs */
+    .day-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: #F2F3F6;
+      border-bottom: 1px solid var(--hug-border);
+    }
+    .day-tab {
+      border: none;
+      background: transparent;
+      padding: 10px 6px;
+      cursor: pointer;
+      text-align: center;
+      color: var(--hug-slate);
+      border-bottom: 3px solid transparent;
+      transition: all 0.15s;
+    }
+    .day-tab.active {
+      background: #FFFFFF;
+      color: var(--hug-crimson);
+      font-weight: 800;
+      border-bottom-color: var(--hug-crimson);
+    }
+    .day-tab-main { font-size: 13px; font-weight: 700; }
+    .day-tab-sub { font-size: 11px; margin-top: 2px; opacity: 0.85; }
+
+    /* Filter Chips */
+    .chip-row {
+      display: flex;
+      gap: 6px;
+      padding: 10px 14px;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--hug-border);
+      overflow-x: auto;
+    }
+    .chip {
+      border: 1px solid #CFD8DC;
+      background: #FFFFFF;
+      color: var(--hug-slate);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 999px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .chip.active {
+      background: var(--hug-navy);
+      border-color: var(--hug-navy);
+      color: #FFFFFF;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      padding: 14px 14px calc(86px + env(safe-area-inset-bottom));
+    }
+
+    /* HOME SCREEN — Minimal & Clean (No Hotel Photo, Fits One Screen) */
+    .home-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      padding-top: 8px;
+    }
+    .home-hero {
+      background: linear-gradient(135deg, #162B5B 0%, #B80F49 100%);
+      color: #FFFFFF;
+      border-radius: 22px;
+      padding: 26px 20px 24px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(184, 15, 73, 0.16);
+    }
+    .home-hero-kicker {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 4px 11px;
+      border-radius: 999px;
+    }
+    .home-hero-theme {
+      font-size: 17.5px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-top: 14px;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+    }
+    .home-hero-meta {
+      margin-top: 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    /* 3 Main Icon Tiles on Home Screen */
+    .home-menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .home-tile {
+      background: #FFFFFF;
+      border: 1px solid var(--hug-border);
+      border-radius: 20px;
+      padding: 22px 8px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+      transition: transform 0.12s ease;
+    }
+    .home-tile:active { transform: scale(0.96); }
+    .home-tile-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tile-program .home-tile-icon { background: var(--pastel-navy); color: var(--hug-navy); }
+    .tile-my .home-tile-icon      { background: var(--pastel-crimson); color: var(--hug-crimson); }
+    .tile-info .home-tile-icon    { background: var(--pastel-teal); color: var(--hug-teal); }
+
+    .home-tile-label {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--hug-charcoal);
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+    .home-tile-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--hug-crimson);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 999px;
+      min-width: 22px;
+      text-align: center;
+    }
+
+    /* Session Cards */
+    .session-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .session-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      border: 1px solid var(--hug-border);
+      border-left: 5px solid var(--hug-crimson);
+      padding: 13px 14px;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      position: relative;
+    }
+    .session-card:active { transform: scale(0.99); }
+    .session-card.saved {
+      box-shadow: 0 3px 12px rgba(184, 15, 73, 0.13);
+      border-color: var(--hug-crimson-border);
+    }
+
+    .tone-crimson { background: var(--pastel-crimson); border-left-color: #B80F49; }
+    .tone-navy    { background: var(--pastel-navy);    border-left-color: #162B5B; }
+    .tone-green   { background: var(--pastel-green);   border-left-color: #0F6A3B; }
+    .tone-teal    { background: var(--pastel-teal);    border-left-color: #1A6D82; }
+    .tone-yellow  { background: var(--pastel-yellow);  border-left-color: #D4A017; }
+    .tone-purple  { background: var(--pastel-purple);  border-left-color: #7E57C2; }
+    .tone-gray    { background: #FFFFFF;               border-left-color: #90A4AE; }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .badges {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .time-badge {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--hug-navy);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cat-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--hug-charcoal);
+      border: 1px solid rgba(22, 43, 91, 0.1);
+    }
+
+    .kj-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: var(--hug-green);
+      color: #FFFFFF;
+    }
+
+    .conflict-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: var(--hug-crimson);
+      color: #FFFFFF;
+    }
+
+    .star-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.9);
+      color: #90A4AE;
+      font-size: 19px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+    .star-btn.saved {
+      background: #FFF8E1;
+      color: #F59E0B;
+    }
+
+    .card-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #111827;
+      margin-top: 6px;
+      line-height: 1.35;
+    }
+
+    .card-sub {
+      font-size: 12.5px;
+      color: #455A64;
+      margin-top: 3px;
+      line-height: 1.35;
+    }
+
+    .card-footer {
+      margin-top: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #37474F;
+      font-weight: 600;
+    }
+    .card-more {
+      color: var(--hug-crimson);
+      font-weight: 700;
+    }
+
+    /* My Schedule Summary & Timeline */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .summary-pill {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 12px;
+      padding: 7px 6px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .summary-pill.active {
+      background: #FFFFFF;
+      color: var(--hug-crimson);
+    }
+    .summary-pill-day { font-size: 11px; font-weight: 600; opacity: 0.9; }
+    .summary-pill-num { font-size: 15px; font-weight: 800; margin-top: 1px; }
+
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+      margin-left: 6px;
+      border-left: 2.5px solid var(--hug-crimson-border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .timeline-item { position: relative; }
+    .timeline-dot {
+      position: absolute;
+      left: -27.5px;
+      top: 16px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--hug-navy);
+      border: 2.5px solid #FFFFFF;
+      box-shadow: 0 0 0 2px #CBD5E1;
+    }
+    .timeline-dot.conflict {
+      background: var(--hug-crimson);
+      box-shadow: 0 0 0 2px var(--hug-crimson-border);
+    }
+
+    .empty-state {
+      background: #FFFFFF;
+      border: 1px dashed #CFD8DC;
+      border-radius: 18px;
+      padding: 36px 20px;
+      text-align: center;
+      color: var(--hug-slate);
+    }
+    .empty-icon { font-size: 36px; margin-bottom: 8px; }
+    .empty-text { font-size: 13.5px; line-height: 1.5; white-space: pre-line; }
+    .primary-btn {
+      margin-top: 14px;
+      background: var(--hug-crimson);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Info / Venue Cards */
+    .venue-card {
+      background: #FFFFFF;
+      border-radius: 18px;
+      border: 1px solid var(--hug-border);
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .venue-body { padding: 15px 16px; }
+    .venue-kicker {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--hug-crimson);
+      letter-spacing: 0.04em;
+    }
+    .venue-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--hug-navy);
+      margin-top: 3px;
+    }
+    .venue-addr {
+      font-size: 13px;
+      color: var(--hug-slate);
+      margin-top: 5px;
+      line-height: 1.45;
+    }
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      text-decoration: none;
+      border: none;
+      border-radius: 11px;
+      padding: 10px 12px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .action-primary { background: var(--hug-crimson); color: #FFFFFF; }
+    .action-soft { background: var(--hug-crimson-soft); color: var(--hug-crimson); }
+    .action-outline { background: #F5F7F9; color: var(--hug-charcoal); border: 1px solid var(--hug-border); }
+
+    .section-heading {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--hug-navy);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hall-box {
+      background: var(--hug-navy-soft);
+      border: 1px solid #DCE4F2;
+      border-radius: 12px;
+      padding: 11px 12px;
+      margin-bottom: 8px;
+    }
+    .hall-box:last-child { margin-bottom: 0; }
+    .hall-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--hug-navy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .hall-desc {
+      font-size: 12.5px;
+      color: #455A64;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    /* Bottom Navigation (4 Tabs) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 520px;
+      background: #FFFFFF;
+      border-top: 1px solid var(--hug-border);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 7px 6px calc(8px + env(safe-area-inset-bottom));
+      z-index: 40;
+    }
+    .nav-btn {
+      border: none;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: #607D8B;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 2px 0;
+    }
+    .nav-pill {
+      padding: 3px 13px;
+      border-radius: 999px;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .nav-btn.active {
+      color: var(--hug-crimson);
+      font-weight: 800;
+    }
+    .nav-btn.active .nav-pill {
+      background: var(--hug-crimson-soft);
+      color: var(--hug-crimson);
+    }
+    .nav-count {
+      font-size: 10.5px;
+      font-weight: 800;
+      background: var(--hug-crimson);
+      color: #FFFFFF;
+      padding: 1px 5.5px;
+      border-radius: 999px;
+    }
+
+    /* Detail Bottom Sheet */
+    .sheet-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.5);
+      z-index: 60;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .sheet-backdrop.open { display: flex; }
+    .sheet {
+      width: 100%;
+      max-width: 520px;
+      max-height: 85vh;
+      background: #FFFFFF;
+      border-radius: 24px 24px 0 0;
+      padding: 12px 18px calc(20px + env(safe-area-inset-bottom));
+      overflow-y: auto;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+    }
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      border-radius: 999px;
+      background: #CFD8DC;
+      margin: 0 auto 12px;
+    }
+    .detail-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      border-top: 2px solid var(--hug-crimson-border);
+      font-size: 12.5px;
+    }
+    .detail-table th, .detail-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #E4E4E4;
+      text-align: left;
+      vertical-align: top;
+    }
+    .detail-table th {
+      width: 88px;
+      background: var(--hug-crimson-soft);
+      color: var(--hug-navy);
+      font-weight: 700;
+    }
+    .talk-list {
+      margin: 0;
+      padding-left: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sheet-cta {
+      width: 100%;
+      margin-top: 16px;
+      padding: 13px;
+      border-radius: 14px;
+      border: none;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .sheet-cta.add { background: var(--hug-crimson); color: #FFFFFF; }
+    .sheet-cta.remove { background: var(--hug-crimson-soft); color: var(--hug-crimson); border: 1.5px solid var(--hug-crimson-border); }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: calc(82px + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--hug-charcoal);
+      color: #FFFFFF;
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 80;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sticky Header -->
+    <header class="top-header">
+      <div class="brand-bar">
+        <div class="brand-left" onclick="switchTab('home')">
+          <img src="./assets/logo_hug2027.png" alt="HUG 2027" class="brand-logo" />
+          <span class="brand-date-pill">Mar 18–20, 2027</span>
+        </div>
+        <button id="langToggleBtn" class="lang-btn" onclick="toggleLang()">EN</button>
+      </div>
+
+      <!-- Smart Install Guide -->
+      <div id="installBanner" class="install-banner">
+        <span id="installMsg"></span>
+        <div style="display:flex;align-items:center;gap:4px;">
+          <button id="installActionBtn" class="install-btn" style="display:none;" onclick="triggerInstall()"></button>
+          <button class="install-close" onclick="dismissInstall()" aria-label="Close">✕</button>
+        </div>
+      </div>
+
+      <!-- Dynamic Sub-Header -->
+      <div class="sub-bar hidden" id="subHeader"></div>
+
+      <!-- Dynamic Day Tabs & Filters -->
+      <div id="dayTabsContainer"></div>
+      <div id="filterContainer"></div>
+    </header>
+
+    <!-- Main Body -->
+    <main class="main-content" id="mainContent"></main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-btn active" id="nav-home" onclick="switchTab('home')">
+        <span class="nav-pill">🏠</span>
+        <span data-i18n="navHome">홈</span>
+      </button>
+      <button class="nav-btn" id="nav-program" onclick="switchTab('program')">
+        <span class="nav-pill">📅</span>
+        <span data-i18n="navProgram">프로그램</span>
+      </button>
+      <button class="nav-btn" id="nav-my" onclick="switchTab('my')">
+        <span class="nav-pill">★ <span class="nav-count" id="savedCountBadge">0</span></span>
+        <span data-i18n="navMy">내 스케줄</span>
+      </button>
+      <button class="nav-btn" id="nav-venue" onclick="switchTab('venue')">
+        <span class="nav-pill">ℹ️</span>
+        <span data-i18n="navInfo">정보</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Session Detail Bottom Sheet -->
+  <div class="sheet-backdrop" id="detailBackdrop" onclick="closeDetail(event)">
+    <div class="sheet" onclick="event.stopPropagation()">
+      <div class="sheet-handle"></div>
+      <div id="detailContent"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const STORAGE_KEY_SAVED = 'hug2027_saved_sessions_v1';
+    const STORAGE_KEY_LANG = 'hug2027_lang_v1';
+
+    let lang = localStorage.getItem(STORAGE_KEY_LANG) || 'ko';
+    let currentTab = 'home';
+    let selectedDay = 1;
+    let mySelectedDay = 1;
+    let trackFilter = 'ALL';
+    let searchQuery = '';
+    let deferredPrompt = null;
+
+    let savedIds = new Set();
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_SAVED);
+      if (raw) savedIds = new Set(JSON.parse(raw));
+    } catch (_) {}
+
+    function persistSaved() {
+      try { localStorage.setItem(STORAGE_KEY_SAVED, JSON.stringify([...savedIds])); } catch (_) {}
+    }
+
+    const T = {
+      ko: {
+        navHome: '홈',
+        navProgram: '프로그램',
+        navMy: '내 스케줄',
+        navInfo: '정보',
+        homeMeta: '2027. 3. 18(목) – 3. 20(토) · 하얏트 리젠시 인천 파라다이스시티',
+        tileProgram: '프로그램',
+        tileMy: '내 스케줄',
+        tileInfo: '정보',
+        programTitle: '학술 프로그램',
+        programSub: '35th Annual Meeting of KCHUGR · 23rd Korea-Japan Joint Symposium',
+        myTitle: '내 스케줄',
+        mySub: '프로그램에서 ★을 누르면 자동으로 정리됩니다',
+        venueTitle: '행사 정보 및 교통 안내',
+        venueSub: '하얏트 리젠시 인천 파라다이스시티 · 2027. 3. 18(목) ~ 3. 20(토)',
+        searchPlaceholder: '연자(강사) 이름, 좌장, 세션·주제 검색 (예: H. pylori, 위암, 한일)',
+        searchAllDaysHint: '전체 일정(Day 1–3) 검색 결과',
+        allTracks: '전체 세션',
+        trackSymp: 'Symposium',
+        trackKJ: '한일 공동',
+        trackSpec: 'Plenary / 특강',
+        kjBadge: '한·일 공동',
+        conflict: '시간 겹침',
+        details: '상세 ›',
+        days: {
+          1: { short: 'Day 1', date: '3/18 (목)' },
+          2: { short: 'Day 2', date: '3/19 (금)' },
+          3: { short: 'Day 3', date: '3/20 (토)' }
+        },
+        savedUnit: '개',
+        emptyMy: '이 날짜에 선택한 세션이 아직 없습니다.\n프로그램 탭에서 관심 세션의 ★ 버튼을 눌러 담아보세요!',
+        goProgram: '프로그램 보러가기',
+        noSearch: '검색 조건에 맞는 세션이 없습니다.',
+        thTime: '일시',
+        thRoom: '장소',
+        thChairs: '좌장',
+        thTalks: '세부 내용',
+        addToMy: '★ 내 스케줄에 담기',
+        removeFromMy: '내 스케줄에서 제외',
+        toastAdded: '내 스케줄에 추가되었습니다',
+        toastRemoved: '내 스케줄에서 제외되었습니다',
+        toastCopied: '주소가 복사되었습니다',
+        iosInstall: '📲 아이폰 설치: Safari 공유(↑) → "홈 화면에 추가"',
+        androidInstall: '📲 홈 화면에 HUG 2027 앱으로 바로 설치하세요',
+        installBtn: '앱 설치',
+        venueKicker: 'CONGRESS VENUE · 공식 행사장',
+        venueName: '하얏트 리젠시 인천 파라다이스시티',
+        venueAddr: '인천광역시 중구 영종해안남로 321번길 208',
+        openGoogleMap: '구글 지도',
+        openNaverMap: '네이버 지도',
+        openKakaoMap: '카카오맵',
+        copyAddr: '주소 복사',
+        datesTitle: '주요 일정 (Important Dates)',
+        date1: '초록 접수 마감: 2027년 1월 11일 (월)',
+        date2: '초록 채택 통보: 2027년 2월 1일 (월)',
+        date3: '사전 등록 마감: 2027년 2월 18일 (목)',
+        shuttleTitle: '인천공항 무료 셔틀버스',
+        shuttleInterval: '약 15~20분 간격',
+        shuttleT1: '제1여객터미널 (T1): 1층 3C / 14C 승강장',
+        shuttleT2: '제2여객터미널 (T2): 1층 1A 승강장',
+        shuttleDrop: '하차: 하얏트 리젠시 인천 / 파라다이스시티',
+        officialTitle: '공식 홈페이지 및 사무국',
+        openWeb: '공식 홈페이지 ↗',
+        emailSec: '사무국 메일'
+      },
+      en: {
+        navHome: 'Home',
+        navProgram: 'Program',
+        navMy: 'My Schedule',
+        navInfo: 'Info',
+        homeMeta: 'MARCH 18 (THU) – 20 (SAT), 2027 · Hyatt Regency Incheon Paradise City',
+        tileProgram: 'Program',
+        tileMy: 'My Schedule',
+        tileInfo: 'Info',
+        programTitle: 'Scientific Program',
+        programSub: '35th Annual Meeting of KCHUGR · 23rd Korea-Japan Joint Symposium',
+        myTitle: 'My Schedule',
+        mySub: 'Tap ★ on any session to build your personal timeline',
+        venueTitle: 'Venue & Information',
+        venueSub: 'Hyatt Regency Incheon Paradise City · March 18–20, 2027',
+        searchPlaceholder: 'Search speaker, chair, session, topic (e.g. H. pylori, Gastric)',
+        searchAllDaysHint: 'Search results across all days (Day 1–3)',
+        allTracks: 'All Sessions',
+        trackSymp: 'Symposium',
+        trackKJ: 'Korea-Japan',
+        trackSpec: 'Plenary / Joint',
+        kjBadge: 'Korea-Japan',
+        conflict: 'Time Conflict',
+        details: 'Details ›',
+        days: {
+          1: { short: 'Day 1', date: 'Mar 18 (Thu)' },
+          2: { short: 'Day 2', date: 'Mar 19 (Fri)' },
+          3: { short: 'Day 3', date: 'Mar 20 (Sat)' }
+        },
+        savedUnit: ' saved',
+        emptyMy: 'No sessions selected for this day yet.\nTap ★ on any session in Program to add it automatically!',
+        goProgram: 'Browse Program',
+        noSearch: 'No sessions match your filter.',
+        thTime: 'Date & Time',
+        thRoom: 'Room',
+        thChairs: 'Chairs',
+        thTalks: 'Highlights',
+        addToMy: '★ Add to My Schedule',
+        removeFromMy: 'Remove from My Schedule',
+        toastAdded: 'Added to My Schedule',
+        toastRemoved: 'Removed from My Schedule',
+        toastCopied: 'Address copied to clipboard',
+        iosInstall: '📲 iPhone Install: Share (↑) → "Add to Home Screen"',
+        androidInstall: '📲 Install HUG 2027 directly to your Home Screen',
+        installBtn: 'Install',
+        venueKicker: 'CONGRESS VENUE',
+        venueName: 'Hyatt Regency Incheon Paradise City',
+        venueAddr: '208, Yeongjonghaeannam-ro 321-gil, Jung-gu, Incheon, Korea',
+        openGoogleMap: 'Google Maps',
+        openNaverMap: 'Naver Map',
+        openKakaoMap: 'KakaoMap',
+        copyAddr: 'Copy Address',
+        datesTitle: 'Important Dates',
+        date1: 'Abstract Submission Deadline: January 11, 2027',
+        date2: 'Acceptance Notification: February 1, 2027',
+        date3: 'Pre-Registration Deadline: February 18, 2027',
+        shuttleTitle: 'Free Incheon Airport Shuttle',
+        shuttleInterval: 'Every ~15–20 min',
+        shuttleT1: 'Terminal 1: 1F Gate 3C / 14C',
+        shuttleT2: 'Terminal 2: 1F Gate 1A',
+        shuttleDrop: 'Stop: Hyatt Regency Incheon / Paradise City',
+        officialTitle: 'Official Website & Secretariat',
+        openWeb: 'Official Website ↗',
+        emailSec: 'Email Secretariat'
+      }
+    };
+
+    // --- HUG 2027 Program Data (Official Program at a Glance from helicobacterkorea.org) ---
+    const SESSIONS = [
+      // DAY 1 — March 18 (Thu)
+      {
+        id: 'h1-reg', day: 1, start: '13:00', end: '14:00', tone: 'gray', track: 'OTHER', kj: false,
+        category: 'Registration',
+        title: 'On-site Registration',
+        subtitle: 'Badge pick-up and congress materials',
+        room: 'Main Foyer',
+        chairs: '', aliases: '등록',
+        talks: ['Registration desk opens at 13:00']
+      },
+      {
+        id: 'h1-s1', day: 1, start: '14:00', end: '15:30', tone: 'crimson', track: 'SYMP', kj: false,
+        category: 'Symposium 1',
+        title: "What's new in Helicobacter pylori research?",
+        subtitle: 'Latest advances in H. pylori diagnosis, resistance, and eradication therapy',
+        room: 'Grand Ballroom',
+        chairs: 'KCHUGR Organizing Committee',
+        aliases: '헬리코박터 제균 항생제 내성',
+        talks: [
+          'Emerging diagnostic strategies & antibiotic resistance patterns',
+          'Updated clinical therapeutics in H. pylori eradication'
+        ]
+      },
+      {
+        id: 'h1-kgca', day: 1, start: '15:45', end: '17:15', tone: 'navy', track: 'SPEC', kj: false,
+        category: 'KCHUGR–KGCA Joint',
+        title: 'Endoscopy meets surgery: Minimally invasive treatment of EGC and GIST',
+        subtitle: 'Joint Symposium with the Korean Gastric Cancer Association (KGCA)',
+        room: 'Grand Ballroom',
+        chairs: 'KCHUGR & KGCA Joint Chairs',
+        aliases: '조기위암 내시경 수술 대한위암학회 GIST EGC',
+        talks: [
+          'Endoscopic vs. minimally invasive surgical approaches for EGC',
+          'Collaborative management of gastric GIST'
+        ]
+      },
+      {
+        id: 'h1-s2', day: 1, start: '17:20', end: '18:30', tone: 'teal', track: 'SYMP', kj: false,
+        category: 'Symposium 2',
+        title: 'Recent update in GI disorders',
+        subtitle: 'Clinical updates across upper gastrointestinal diseases',
+        room: 'Grand Ballroom',
+        chairs: 'HUG 2027 Faculty',
+        aliases: '상부위장관 질환 최신 지견',
+        talks: ['Recent clinical updates in upper GI disorders and endoscopic care']
+      },
+
+      // DAY 2 — March 19 (Fri)
+      {
+        id: 'h2-s3', day: 2, start: '09:00', end: '10:30', tone: 'crimson', track: 'SYMP', kj: false,
+        category: 'Symposium 3 & Free Papers',
+        title: 'Predicting, understanding, and intercepting gastric cancer',
+        subtitle: 'Risk stratification, carcinogenesis, and early interception strategies',
+        room: 'Grand Ballroom',
+        chairs: 'HUG 2027 Faculty',
+        aliases: '위암 예측 예방 발암 기전 자유연제',
+        talks: [
+          'Predicting and intercepting gastric carcinogenesis',
+          'Selected Free Paper Oral Presentations'
+        ]
+      },
+      {
+        id: 'h2-s4', day: 2, start: '10:45', end: '12:00', tone: 'teal', track: 'SYMP', kj: false,
+        category: 'Symposium 4',
+        title: 'Rethinking gastric cancer screening',
+        subtitle: 'Optimizing screening intervals, endoscopy quality, and risk-based strategies',
+        room: 'Grand Ballroom',
+        chairs: 'HUG 2027 Faculty',
+        aliases: '위암 검진 내시경 스크리닝',
+        talks: ['Rethinking national & personalized gastric cancer screening strategies']
+      },
+      {
+        id: 'h2-lunch2', day: 2, start: '12:00', end: '13:00', tone: 'yellow', track: 'OTHER', kj: false,
+        category: 'Luncheon',
+        title: 'Luncheon Symposium 2',
+        subtitle: 'Sponsored lunch & clinical update symposium',
+        room: 'Grand Ballroom',
+        chairs: '', aliases: '런천 심포지엄',
+        talks: ['Sponsored Luncheon Symposium (detailed speakers updated on helicobacterkorea.org)']
+      },
+      {
+        id: 'h2-kj1', day: 2, start: '13:15', end: '14:30', tone: 'green', track: 'KJ', kj: true,
+        category: 'Korea–Japan Joint 1',
+        title: '23rd Korea-Japan Joint Symposium — Session 1',
+        subtitle: 'Cross-border insights in H. pylori & upper GI clinical research',
+        room: 'Grand Ballroom',
+        chairs: 'Korea & Japan Joint Chairs',
+        aliases: '한일 공동 심포지엄 일본 헬리코박터',
+        talks: ['Joint lectures by KCHUGR & Japanese Society for Helicobacter Research']
+      },
+      {
+        id: 'h2-kj2', day: 2, start: '14:45', end: '16:00', tone: 'green', track: 'KJ', kj: true,
+        category: 'Korea–Japan Joint 2',
+        title: '23rd Korea-Japan Joint Symposium — Session 2',
+        subtitle: 'Gastric cancer prevention & eradication strategies in East Asia',
+        room: 'Grand Ballroom',
+        chairs: 'Korea & Japan Joint Chairs',
+        aliases: '한일 공동 심포지엄 동아시아 위암 예방',
+        talks: ['East Asian clinical perspectives on H. pylori eradication and screening']
+      },
+      {
+        id: 'h2-kj3', day: 2, start: '16:15', end: '17:45', tone: 'green', track: 'KJ', kj: true,
+        category: 'Korea–Japan Joint 3 & YIA',
+        title: 'Korea-Japan Joint Session 3 & Young Investigator Award (YIA)',
+        subtitle: 'Focused joint session & Young Investigator Award Ceremony',
+        room: 'Grand Ballroom',
+        chairs: 'Korea & Japan Joint Committee',
+        aliases: '한일 공동 젊은연구자상 YIA 시상식',
+        talks: ['Korea-Japan Joint Session 3', 'Young Investigator Award (YIA) Ceremony']
+      },
+      {
+        id: 'h2-gala', day: 2, start: '18:30', end: '20:30', tone: 'crimson', track: 'OTHER', kj: false,
+        category: 'Social Event',
+        title: 'Gala Dinner (KCHUGR 30th Anniversary)',
+        subtitle: 'Celebrating the 30th Anniversary of KCHUGR',
+        room: 'Grand Ballroom',
+        chairs: '', aliases: '갈라 디너 만찬 30주년',
+        talks: ['KCHUGR 30th Anniversary Gala Dinner & Networking']
+      },
+
+      // DAY 3 — March 20 (Sat)
+      {
+        id: 'h3-plenary', day: 3, start: '09:00', end: '10:15', tone: 'purple', track: 'SPEC', kj: false,
+        category: 'Plenary Session',
+        title: 'Plenary Session',
+        subtitle: 'Keynote & highest-ranked scientific oral presentations of HUG 2027',
+        room: 'Grand Ballroom',
+        chairs: 'KCHUGR President & Scientific Committee',
+        aliases: '플레너리 기조강연',
+        talks: ['Plenary lectures & top-scored scientific abstracts']
+      },
+      {
+        id: 'h3-s5', day: 3, start: '10:30', end: '11:45', tone: 'crimson', track: 'SYMP', kj: false,
+        category: 'Symposium 5',
+        title: 'Early-onset gastric cancer: Epidemiology, biology, and management',
+        subtitle: 'Understanding rising trends and tailored clinical care',
+        room: 'Grand Ballroom',
+        chairs: 'HUG 2027 Faculty',
+        aliases: '조기발병 위암 역학 분자생물학 치료',
+        talks: [
+          'Epidemiology & molecular biology of early-onset gastric cancer',
+          'Clinical management & surveillance strategies'
+        ]
+      },
+      {
+        id: 'h3-ga', day: 3, start: '11:45', end: '12:15', tone: 'navy', track: 'SPEC', kj: false,
+        category: 'Closing',
+        title: 'General Assembly & Closing Remarks',
+        subtitle: 'KCHUGR General Assembly & HUG 2027 Closing Ceremony',
+        room: 'Grand Ballroom',
+        chairs: 'KCHUGR Board',
+        aliases: '정기총회 폐회식',
+        talks: ['General Assembly & Best Presentation Awards', 'Closing Remarks']
+      },
+      {
+        id: 'h3-lunch3', day: 3, start: '12:15', end: '13:15', tone: 'yellow', track: 'OTHER', kj: false,
+        category: 'Luncheon',
+        title: 'Luncheon Symposium 3',
+        subtitle: 'Closing sponsored luncheon symposium',
+        room: 'Grand Ballroom',
+        chairs: '', aliases: '런천 심포지엄',
+        talks: ['Sponsored Luncheon Symposium 3']
+      }
+    ];
+
+    function toMin(hhmm) {
+      const [h, m] = hhmm.split(':').map(Number);
+      return h * 60 + m;
+    }
+
+    function hasConflict(item, dayItems) {
+      const s1 = toMin(item.start), e1 = toMin(item.end);
+      return dayItems.some((o) => o.id !== item.id && s1 < toMin(o.end) && toMin(o.start) < e1);
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => el.classList.remove('show'), 1800);
+    }
+
+    function toggleLang() {
+      lang = lang === 'ko' ? 'en' : 'ko';
+      try { localStorage.setItem(STORAGE_KEY_LANG, lang); } catch (_) {}
+      render();
+      updateInstallBanner();
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.nav-btn').forEach((b) => b.classList.remove('active'));
+      const navBtn = document.getElementById('nav-' + tab);
+      if (navBtn) navBtn.classList.add('active');
+      window.scrollTo(0, 0);
+      render();
+    }
+
+    function toggleSave(id, ev) {
+      if (ev) ev.stopPropagation();
+      const t = T[lang];
+      if (savedIds.has(id)) {
+        savedIds.delete(id);
+        showToast(t.toastRemoved);
+      } else {
+        savedIds.add(id);
+        showToast(t.toastAdded);
+      }
+      persistSaved();
+      render();
+    }
+
+    function openDetail(id) {
+      const s = SESSIONS.find((x) => x.id === id);
+      if (!s) return;
+      const t = T[lang];
+      const isSaved = savedIds.has(s.id);
+      document.getElementById('detailContent').innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+          <div class="badges">
+            <span class="cat-badge">${s.category}</span>
+            ${s.kj ? `<span class="kj-badge">${t.kjBadge}</span>` : ''}
+          </div>
+          <button onclick="closeDetail()" style="border:none;background:#F1F5F9;color:#475569;border-radius:999px;width:28px;height:28px;font-weight:700;cursor:pointer;">✕</button>
+        </div>
+        <h2 style="font-size:17px;font-weight:800;color:#162B5B;margin:10px 0 4px;line-height:1.35;">${s.title}</h2>
+        <p style="font-size:13px;color:#546E7A;margin:0;line-height:1.4;">${s.subtitle}</p>
+        <table class="detail-table">
+          <tr><th>${t.thTime}</th><td><b>${t.days[s.day].date}</b> · ${s.start} – ${s.end}</td></tr>
+          <tr><th>${t.thRoom}</th><td>📍 ${s.room}</td></tr>
+          ${s.chairs ? `<tr><th>${t.thChairs}</th><td>${s.chairs}</td></tr>` : ''}
+          <tr>
+            <th>${t.thTalks}</th>
+            <td>
+              <ul class="talk-list">
+                ${s.talks.map((tk) => `<li>${tk}</li>`).join('')}
+              </ul>
+            </td>
+          </tr>
+        </table>
+        <button class="sheet-cta ${isSaved ? 'remove' : 'add'}" onclick="toggleSave('${s.id}'); openDetail('${s.id}');">
+          ${isSaved ? t.removeFromMy : t.addToMy}
+        </button>
+      `;
+      document.getElementById('detailBackdrop').classList.add('open');
+    }
+
+    function closeDetail(ev) {
+      if (ev && ev.target !== document.getElementById('detailBackdrop')) return;
+      document.getElementById('detailBackdrop').classList.remove('open');
+    }
+
+    function setSearch(val) {
+      searchQuery = val;
+      const clr = document.getElementById('searchClearBtn');
+      if (clr) clr.classList.toggle('visible', !!val);
+      renderBodyOnly();
+    }
+
+    function clearSearch() {
+      searchQuery = '';
+      const inp = document.getElementById('programSearchInput');
+      if (inp) inp.value = '';
+      const clr = document.getElementById('searchClearBtn');
+      if (clr) clr.classList.remove('visible');
+      renderBodyOnly();
+    }
+
+    function copyAddress() {
+      const addr = T[lang].venueAddr;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(() => showToast(T[lang].toastCopied));
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = addr;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast(T[lang].toastCopied);
+      }
+    }
+
+    function renderDayTabsHTML(activeDay, handlerName, showCounts) {
+      const t = T[lang];
+      return `
+        <div class="day-tabs">
+          ${[1, 2, 3].map((d) => {
+            const cnt = SESSIONS.filter((s) => s.day === d && savedIds.has(s.id)).length;
+            return `
+              <button class="day-tab ${d === activeDay ? 'active' : ''}" onclick="${handlerName}(${d})">
+                <div class="day-tab-main">${t.days[d].short}${showCounts ? ` (${cnt})` : ''}</div>
+                <div class="day-tab-sub">${t.days[d].date}</div>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function setProgramDay(d) { selectedDay = d; render(); }
+    function setMyDay(d) { mySelectedDay = d; render(); }
+    function setTrackFilter(tr) { trackFilter = tr; render(); }
+
+    function renderBodyOnly() {
+      const t = T[lang];
+      const main = document.getElementById('mainContent');
+
+      // HOME SCREEN — Minimal & Clean (No Hotel Photo)
+      if (currentTab === 'home') {
+        main.innerHTML = `
+          <div class="home-wrap">
+            <section class="home-hero">
+              <div class="home-hero-kicker">HUG 2027 · KCHUGR 30th Anniversary</div>
+              <div class="home-hero-theme">Helicobacter &amp; Upper GI Diseases<br/>23rd Korea-Japan Joint Symposium</div>
+              <div class="home-hero-meta">${t.homeMeta}</div>
+            </section>
+
+            <!-- 3 Core Icon Tiles: Program, My Schedule, Info -->
+            <section class="home-menu-grid">
+              <button class="home-tile tile-program" onclick="switchTab('program')">
+                <div class="home-tile-icon">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="3"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                    <line x1="8" y1="14" x2="16" y2="14"></line>
+                    <line x1="8" y1="18" x2="13" y2="18"></line>
+                  </svg>
+                </div>
+                <div class="home-tile-label">${t.tileProgram}</div>
+              </button>
+
+              <button class="home-tile tile-my" onclick="switchTab('my')">
+                ${savedIds.size > 0 ? `<span class="home-tile-badge">${savedIds.size}</span>` : ''}
+                <div class="home-tile-icon">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.5l2.92 5.92 6.53.95-4.72 4.6 1.11 6.5L12 17.4l-5.84 3.07 1.11-6.5-4.72-4.6 6.53-.95L12 2.5z"/>
+                  </svg>
+                </div>
+                <div class="home-tile-label">${t.tileMy}</div>
+              </button>
+
+              <button class="home-tile tile-info" onclick="switchTab('venue')">
+                <div class="home-tile-icon">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                </div>
+                <div class="home-tile-label">${t.tileInfo}</div>
+              </button>
+            </section>
+          </div>
+        `;
+        return;
+      }
+
+      if (currentTab === 'program') {
+        const q = searchQuery.trim().toLowerCase();
+        const isSearching = q.length > 0;
+        const list = SESSIONS.filter((s) => {
+          if (!isSearching && s.day !== selectedDay) return false;
+          if (trackFilter !== 'ALL' && s.track !== trackFilter) return false;
+          if (isSearching) {
+            const hay = (s.title + ' ' + s.subtitle + ' ' + s.category + ' ' + s.chairs + ' ' + (s.aliases || '') + ' ' + s.talks.join(' ')).toLowerCase();
+            if (!hay.includes(q)) return false;
+          }
+          return true;
+        });
+
+        const searchBanner = isSearching ? `
+          <div style="font-size:12px;font-weight:700;color:#162B5B;background:#FDF0F4;border:1px solid #F5C6D6;border-radius:10px;padding:7px 12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">
+            <span>🔍 ${t.searchAllDaysHint}: <b>${list.length}</b></span>
+            <button onclick="clearSearch()" style="border:none;background:transparent;color:#B80F49;font-weight:800;font-size:12px;cursor:pointer;">✕</button>
+          </div>
+        ` : '';
+
+        main.innerHTML = searchBanner + (list.length ? `
+          <div class="session-list">
+            ${list.map((s) => {
+              const isSaved = savedIds.has(s.id);
+              const matchedTalks = isSearching ? s.talks.filter((tk) => tk.toLowerCase().includes(q)) : [];
+              const matchedChair = isSearching && s.chairs && s.chairs.toLowerCase().includes(q);
+              return `
+                <article class="session-card tone-${s.tone} ${isSaved ? 'saved' : ''}" onclick="openDetail('${s.id}')">
+                  <div class="card-top">
+                    <div class="badges">
+                      ${isSearching ? `<span class="cat-badge" style="background:#162B5B;color:#FFF;border:none;">${t.days[s.day].date}</span>` : ''}
+                      <span class="time-badge">${s.start}–${s.end}</span>
+                      <span class="cat-badge">${s.category}</span>
+                      ${s.kj ? `<span class="kj-badge">${t.kjBadge}</span>` : ''}
+                    </div>
+                    <button class="star-btn ${isSaved ? 'saved' : ''}" onclick="toggleSave('${s.id}', event)" aria-label="Bookmark">
+                      ${isSaved ? '★' : '☆'}
+                    </button>
+                  </div>
+                  <div class="card-title">${s.title}</div>
+                  <div class="card-sub">${s.subtitle}</div>
+                  ${matchedChair ? `<div style="margin-top:6px;font-size:11.5px;color:#162B5B;background:rgba(255,255,255,0.88);padding:5px 8px;border-radius:8px;"><b>👤 ${t.thChairs}:</b> ${s.chairs}</div>` : ''}
+                  ${matchedTalks.length ? `<div style="margin-top:6px;font-size:11.5px;color:#162B5B;background:rgba(255,255,255,0.88);padding:5px 8px;border-radius:8px;">${matchedTalks.map((tk) => `<div>🎤 ${tk}</div>`).join('')}</div>` : ''}
+                  <div class="card-footer">
+                    <span>📍 ${s.room}</span>
+                    <span class="card-more">${t.details}</span>
+                  </div>
+                </article>
+              `;
+            }).join('')}
+          </div>
+        ` : `<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-text">${t.noSearch}</div></div>`);
+        return;
+      }
+
+      if (currentTab === 'my') {
+        const dayItems = SESSIONS
+          .filter((s) => s.day === mySelectedDay && savedIds.has(s.id))
+          .sort((a, b) => toMin(a.start) - toMin(b.start));
+
+        if (!dayItems.length) {
+          main.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon">☆</div>
+              <div class="empty-text">${t.emptyMy}</div>
+              <button class="primary-btn" onclick="selectedDay=${mySelectedDay}; switchTab('program');">${t.goProgram}</button>
+            </div>
+          `;
+          return;
+        }
+
+        main.innerHTML = `
+          <div class="timeline">
+            ${dayItems.map((s) => {
+              const conflict = hasConflict(s, dayItems);
+              return `
+                <div class="timeline-item">
+                  <div class="timeline-dot ${conflict ? 'conflict' : ''}"></div>
+                  <article class="session-card tone-${s.tone}" onclick="openDetail('${s.id}')">
+                    <div class="card-top">
+                      <div class="badges">
+                        <span class="time-badge">${s.start} – ${s.end}</span>
+                        <span class="cat-badge">${s.category}</span>
+                        ${conflict ? `<span class="conflict-badge">⚠ ${t.conflict}</span>` : ''}
+                      </div>
+                      <button class="star-btn saved" onclick="toggleSave('${s.id}', event)" aria-label="Remove">★</button>
+                    </div>
+                    <div class="card-title">${s.title}</div>
+                    <div class="card-footer">
+                      <span>📍 ${s.room}</span>
+                      ${s.kj ? `<span class="kj-badge">${t.kjBadge}</span>` : `<span class="card-more">${t.details}</span>`}
+                    </div>
+                  </article>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+        return;
+      }
+
+      // INFO TAB (No Hotel Photo)
+      main.innerHTML = `
+        <section class="venue-card">
+          <div class="venue-body">
+            <div class="venue-kicker">${t.venueKicker}</div>
+            <div class="venue-name">${t.venueName}</div>
+            <div class="venue-addr">${t.venueAddr}</div>
+            <div class="btn-grid">
+              <a class="action-btn action-primary" target="_blank" rel="noopener"
+                 href="https://maps.google.com/?q=Hyatt+Regency+Incheon+Paradise+City">🗺 ${t.openGoogleMap}</a>
+              <button class="action-btn action-soft" onclick="copyAddress()">📋 ${t.copyAddr}</button>
+              <a class="action-btn action-outline" target="_blank" rel="noopener"
+                 href="https://map.naver.com/p/search/%ED%95%98%EC%96%8F%ED%8A%B8%20%EB%A6%AC%EC%A0%A0%EC%8B%9C%20%EC%9D%B8%EC%B2%9C">🟢 ${t.openNaverMap}</a>
+              <a class="action-btn action-outline" target="_blank" rel="noopener"
+                 href="https://map.kakao.com/?q=%ED%95%98%EC%96%8F%ED%8A%B8%20%EB%A6%AC%EC%A0%A0%EC%8B%9C%20%EC%9D%B8%EC%B2%9C">🟡 ${t.openKakaoMap}</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="venue-card">
+          <div class="venue-body">
+            <div class="section-heading"><span>🗓 ${t.datesTitle}</span></div>
+            <div class="hall-box">
+              <div class="hall-desc" style="margin-top:0;line-height:1.7;">
+                <div>• ${t.date1}</div>
+                <div>• ${t.date2}</div>
+                <div>• ${t.date3}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="venue-card">
+          <div class="venue-body">
+            <div class="section-heading">
+              <span>🚌 ${t.shuttleTitle}</span>
+              <span class="kj-badge">${t.shuttleInterval}</span>
+            </div>
+            <div class="hall-desc" style="margin-top:0;line-height:1.7;">
+              <div>• <b>${t.shuttleT1}</b></div>
+              <div>• <b>${t.shuttleT2}</b></div>
+              <div>• ${t.shuttleDrop}</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="venue-card">
+          <div class="venue-body">
+            <div class="section-heading"><span>🌐 ${t.officialTitle}</span></div>
+            <div class="hall-desc" style="margin-top:0;margin-bottom:10px;">
+              Tel: +82-2-6677-0542 · hug@helicobacterkorea.org
+            </div>
+            <div class="btn-grid" style="margin-top:0;">
+              <a class="action-btn action-primary" target="_blank" rel="noopener" href="https://www.helicobacterkorea.org">${t.openWeb}</a>
+              <a class="action-btn action-soft" href="mailto:hug@helicobacterkorea.org">✉ ${t.emailSec}</a>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function render() {
+      const t = T[lang];
+      document.documentElement.lang = lang;
+      document.getElementById('langToggleBtn').textContent = lang === 'ko' ? 'EN' : '한국어';
+      document.getElementById('savedCountBadge').textContent = savedIds.size;
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+      });
+
+      const subHeader = document.getElementById('subHeader');
+      const dayTabsEl = document.getElementById('dayTabsContainer');
+      const filterEl = document.getElementById('filterContainer');
+
+      if (currentTab === 'home') {
+        subHeader.classList.add('hidden');
+        subHeader.innerHTML = '';
+        dayTabsEl.innerHTML = '';
+        filterEl.innerHTML = '';
+      } else if (currentTab === 'program') {
+        subHeader.classList.remove('hidden');
+        subHeader.innerHTML = `
+          <div class="page-title">${t.programTitle}</div>
+          <div class="page-subtitle">${t.programSub}</div>
+          <div class="search-box">
+            <input id="programSearchInput" class="search-input" type="search"
+              placeholder="${t.searchPlaceholder}" value="${searchQuery.replace(/"/g, '&quot;')}"
+              oninput="setSearch(this.value)" />
+            <button id="searchClearBtn" class="search-clear ${searchQuery ? 'visible' : ''}" onclick="clearSearch()">✕</button>
+          </div>
+        `;
+        dayTabsEl.innerHTML = renderDayTabsHTML(selectedDay, 'setProgramDay', false);
+        filterEl.innerHTML = `
+          <div class="chip-row">
+            <button class="chip ${trackFilter === 'ALL' ? 'active' : ''}" onclick="setTrackFilter('ALL')">${t.allTracks}</button>
+            <button class="chip ${trackFilter === 'SYMP' ? 'active' : ''}" onclick="setTrackFilter('SYMP')">${t.trackSymp}</button>
+            <button class="chip ${trackFilter === 'KJ' ? 'active' : ''}" onclick="setTrackFilter('KJ')">${t.trackKJ}</button>
+            <button class="chip ${trackFilter === 'SPEC' ? 'active' : ''}" onclick="setTrackFilter('SPEC')">${t.trackSpec}</button>
+          </div>
+        `;
+      } else if (currentTab === 'my') {
+        subHeader.classList.remove('hidden');
+        subHeader.innerHTML = `
+          <div class="page-title">${t.myTitle}</div>
+          <div class="page-subtitle">${t.mySub}</div>
+          <div class="summary-grid">
+            ${[1, 2, 3].map((d) => {
+              const cnt = SESSIONS.filter((s) => s.day === d && savedIds.has(s.id)).length;
+              return `
+                <div class="summary-pill ${mySelectedDay === d ? 'active' : ''}" onclick="setMyDay(${d})">
+                  <div class="summary-pill-day">${t.days[d].short}</div>
+                  <div class="summary-pill-num">${cnt}${t.savedUnit}</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+        dayTabsEl.innerHTML = renderDayTabsHTML(mySelectedDay, 'setMyDay', true);
+        filterEl.innerHTML = '';
+      } else {
+        subHeader.classList.remove('hidden');
+        subHeader.innerHTML = `
+          <div class="page-title">${t.venueTitle}</div>
+          <div class="page-subtitle">${t.venueSub}</div>
+        `;
+        dayTabsEl.innerHTML = '';
+        filterEl.innerHTML = '';
+      }
+
+      renderBodyOnly();
+    }
+
+    // --- PWA Install & Service Worker ---
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    let installDismissed = false;
+
+    function updateInstallBanner() {
+      const banner = document.getElementById('installBanner');
+      const msg = document.getElementById('installMsg');
+      const btn = document.getElementById('installActionBtn');
+      if (isStandalone || installDismissed) {
+        banner.classList.remove('show');
+        return;
+      }
+      if (deferredPrompt) {
+        msg.textContent = T[lang].androidInstall;
+        btn.textContent = T[lang].installBtn;
+        btn.style.display = 'inline-block';
+        banner.classList.add('show');
+      } else if (isIOS) {
+        msg.textContent = T[lang].iosInstall;
+        btn.style.display = 'none';
+        banner.classList.add('show');
+      }
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      updateInstallBanner();
+    });
+
+    function triggerInstall() {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.finally(() => {
+        deferredPrompt = null;
+        updateInstallBanner();
+      });
+    }
+
+    function dismissInstall() {
+      installDismissed = true;
+      updateInstallBanner();
+    }
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+
+    render();
+    updateInstallBanner();
+  </script>
+</body>
+</html>

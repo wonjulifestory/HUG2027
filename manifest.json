@@ -1,0 +1,25 @@
+{
+  "name": "HUG 2027 — Program & My Schedule",
+  "short_name": "HUG 2027",
+  "description": "The International Symposium on Helicobacter and Upper Gastrointestinal Diseases (March 18-20, 2027, Hyatt Regency Incheon Paradise City)",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFFFFF",
+  "theme_color": "#B80F49",
+  "icons": [
+    {
+      "src": "./assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
