@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hug2027-v9';
+const CACHE_NAME = 'hug2027-v10';
 const ASSETS = [
   './',
   './index.html',
@@ -43,6 +43,7 @@ self.addEventListener('fetch', (event) => {
       .catch(() => caches.match(event.request).then((c) => c || caches.match('./index.html')))
   );
 });
+
 
 
 
