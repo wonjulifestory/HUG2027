@@ -1256,7 +1256,7 @@
       flex: 1;
       min-height: 0;
       overflow: hidden;
-      padding: 10px 12px calc(68px + env(safe-area-inset-bottom)) !important;
+      padding: 0 10px calc(64px + env(safe-area-inset-bottom)) !important;
       display: flex;
       flex-direction: column;
     }
@@ -1265,17 +1265,23 @@
       min-height: 0;
       display: flex;
       flex-direction: column;
-      gap: 9px !important;
+      gap: 7px !important;
       padding-top: 0 !important;
     }
     .app-shell.is-home .home-visual-card {
       flex: 1 1 0;
-      min-height: 120px;
+      min-height: 230px;
+      width: calc(100% + 20px);
+      margin: 0 -10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #FFFFFF;
-      border-radius: 16px;
+      background: linear-gradient(135deg, #F6F2FA 0%, #EFE6F4 100%);
+      border-radius: 0 0 18px 18px;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      box-shadow: 0 4px 16px rgba(22, 43, 91, 0.08);
     }
     .app-shell.is-home .home-visual-img {
       width: 100%;
@@ -1284,48 +1290,65 @@
     }
     .app-shell.is-home .home-menu-grid {
       flex-shrink: 0;
-      gap: 8px !important;
+      gap: 7px !important;
     }
     .app-shell.is-home .home-tile {
-      padding: 11px 6px 10px !important;
-      gap: 6px !important;
-      border-radius: 16px !important;
+      padding: 8px 6px 7px !important;
+      gap: 4px !important;
+      border-radius: 14px !important;
     }
     .app-shell.is-home .home-tile-icon {
-      width: 44px !important;
-      height: 44px !important;
-      border-radius: 13px !important;
+      width: 38px !important;
+      height: 38px !important;
+      border-radius: 11px !important;
     }
     .app-shell.is-home .home-tile-icon svg {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
     }
     .app-shell.is-home .home-tile-label {
-      font-size: 13px !important;
+      font-size: 12px !important;
     }
-    .app-shell.is-home .home-install-cta {
+    .app-shell.is-home .home-install-cta,
+    .app-shell.is-home .home-dday-card,
+    .app-shell.is-home .home-card {
       display: none !important;
+    }
+    .app-shell.is-home .home-footer {
+      flex-shrink: 0;
+      padding: 0 !important;
+      font-size: 10px !important;
+      line-height: 1.2 !important;
+    }
+    .app-shell.is-home .home-footer > div:nth-child(1),
+    .app-shell.is-home .home-footer > div:nth-child(2) {
+      display: none;
+    }
+    .app-shell.is-home .home-footer .version-badge {
+      margin-top: 0;
+      padding: 1px 8px;
+      font-size: 10px;
     }
     .app-shell.is-home .live-card {
       flex-shrink: 0;
-      padding: 9px 11px !important;
-      border-radius: 16px !important;
+      padding: 8px 10px !important;
+      border-radius: 14px !important;
     }
     .app-shell.is-home .live-header {
-      margin-bottom: 6px !important;
+      margin-bottom: 5px !important;
     }
     .app-shell.is-home .room-board {
       display: grid !important;
       grid-template-columns: repeat(2, 1fr);
-      gap: 6px !important;
+      gap: 5px !important;
       margin-top: 0 !important;
-      max-height: 132px;
+      max-height: 104px;
       overflow-y: auto;
     }
     .app-shell.is-home .room-row {
-      padding: 7px 9px !important;
-      min-height: 44px !important;
-      border-radius: 11px !important;
+      padding: 6px 8px !important;
+      min-height: 38px !important;
+      border-radius: 10px !important;
     }
     .app-shell.is-home .room-name {
       font-size: 11px !important;
@@ -1411,7 +1434,7 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    const APP_VERSION = 'v1.1.0';
+    const APP_VERSION = 'v1.1.1';
     const STORAGE_KEY_SAVED = 'hug2027_saved_sessions_v1';
     const STORAGE_KEY_LANG = 'hug2027_lang_v1';
 
