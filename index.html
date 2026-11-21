@@ -357,6 +357,349 @@
       text-align: center;
     }
 
+    /* LIVE Now / Up Next Card */
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.25); }
+    }
+    .live-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--hug-crimson-border);
+      border-radius: 18px;
+      padding: 13px 15px;
+      box-shadow: 0 4px 14px rgba(184, 15, 73, 0.09);
+    }
+    .live-card.upcoming {
+      border-color: #DCE4F2;
+      box-shadow: 0 4px 14px rgba(22, 43, 91, 0.07);
+    }
+    .live-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #FFFFFF;
+      background: #E11D48;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+    .live-pill.next { background: var(--hug-crimson); }
+    .live-pill.dday { background: var(--hug-navy); }
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      animation: pulseDot 1.3s infinite ease-in-out;
+    }
+    .live-clock {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--hug-slate);
+      font-variant-numeric: tabular-nums;
+    }
+    .live-item {
+      padding: 9px 11px;
+      border-radius: 12px;
+      background: var(--hug-crimson-soft);
+      border: 1px solid var(--hug-crimson-border);
+      cursor: pointer;
+      margin-top: 6px;
+    }
+    .live-item.next-item {
+      background: var(--hug-navy-soft);
+      border-color: #DCE4F2;
+    }
+    .live-item-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #111827;
+      line-height: 1.35;
+    }
+    .live-item-meta {
+      font-size: 11.5px;
+      color: #455A64;
+      margin-top: 3px;
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .live-progress {
+      height: 4px;
+      background: #FDE2E7;
+      border-radius: 999px;
+      margin-top: 7px;
+      overflow: hidden;
+    }
+    .live-progress-bar {
+      height: 100%;
+      background: #E11D48;
+      border-radius: 999px;
+    }
+    .sim-btn {
+      border: 1px solid #DCE4F2;
+      background: var(--hug-navy-soft);
+      color: var(--hug-navy);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .session-card.is-live {
+      border: 2px solid #E11D48;
+      border-left: 6px solid #E11D48;
+      box-shadow: 0 4px 16px rgba(225, 29, 72, 0.16);
+    }
+    .live-inline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: #E11D48;
+      color: #FFFFFF;
+    }
+
+    /* Home Screen Extended Sections */
+    .home-dday-card {
+      background: #FFFFFF;
+      border: 1px solid var(--hug-border);
+      border-radius: 18px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+    }
+    .dday-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .dday-pill {
+      background: linear-gradient(135deg, var(--hug-crimson) 0%, #D91B5C 100%);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 900;
+      padding: 8px 12px;
+      border-radius: 12px;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+      box-shadow: 0 4px 10px rgba(184, 15, 73, 0.2);
+    }
+    .dday-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--hug-navy);
+      line-height: 1.3;
+    }
+    .dday-sub {
+      font-size: 11.5px;
+      color: var(--hug-slate);
+      margin-top: 2px;
+    }
+
+    .home-card {
+      background: #FFFFFF;
+      border: 1px solid var(--hug-border);
+      border-radius: 18px;
+      padding: 15px 16px;
+      box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+    }
+    .home-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .home-card-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--hug-navy);
+      letter-spacing: -0.02em;
+    }
+    .home-link-btn {
+      border: none;
+      background: transparent;
+      color: var(--hug-crimson);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 2px 4px;
+    }
+
+    .glance-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .glance-row {
+      width: 100%;
+      text-align: left;
+      border: 1px solid #EAEEF4;
+      background: #FAFBFD;
+      border-radius: 14px;
+      padding: 11px 12px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      cursor: pointer;
+      transition: background 0.12s ease, transform 0.12s ease;
+    }
+    .glance-row:active {
+      background: var(--hug-navy-soft);
+      transform: scale(0.99);
+    }
+    .glance-day-badge {
+      flex-shrink: 0;
+      min-width: 62px;
+      text-align: center;
+      background: var(--hug-navy);
+      color: #FFFFFF;
+      border-radius: 10px;
+      padding: 6px 6px;
+    }
+    .glance-day-badge.d2 { background: var(--hug-crimson); }
+    .glance-day-badge.d3 { background: var(--hug-teal); }
+    .glance-day-num {
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    .glance-day-date {
+      font-size: 10px;
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+    .glance-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .glance-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--hug-charcoal);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .glance-sub {
+      font-size: 11.5px;
+      color: var(--hug-slate);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .glance-chevron {
+      color: #90A4AE;
+      font-size: 16px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .featured-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .featured-item {
+      border: 1px solid var(--hug-border);
+      border-left: 4px solid var(--hug-crimson);
+      border-radius: 14px;
+      padding: 11px 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: transform 0.12s ease;
+    }
+    .featured-item:active { transform: scale(0.99); }
+    .featured-meta {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--hug-navy);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .featured-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #111827;
+      margin-top: 4px;
+      line-height: 1.35;
+    }
+
+    .deadline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .deadline-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 11px;
+      border-radius: 12px;
+      background: var(--hug-navy-soft);
+      font-size: 12.5px;
+    }
+    .deadline-label {
+      font-weight: 700;
+      color: var(--hug-charcoal);
+    }
+    .deadline-date {
+      font-weight: 800;
+      color: var(--hug-crimson);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .home-venue-strip {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .home-venue-info {
+      font-size: 12.5px;
+      color: var(--hug-slate);
+      line-height: 1.5;
+    }
+    .home-venue-info b {
+      color: var(--hug-navy);
+      font-size: 13.5px;
+    }
+
+    .home-footer {
+      text-align: center;
+      padding: 6px 8px 4px;
+      color: #78909C;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+    .home-footer b {
+      color: var(--hug-navy);
+      font-weight: 700;
+    }
+
     /* Session Cards */
     .session-list {
       display: flex;
@@ -894,6 +1237,15 @@
         trackKJ: '한일 공동',
         trackSpec: 'Plenary / 특강',
         kjBadge: '한·일 공동',
+        liveNow: '지금 진행 중',
+        upNext: '다음 일정',
+        beforeEvent: '학회 예정',
+        afterEvent: '학회 종료',
+        afterEventMsg: 'HUG 2027 학술대회가 종료되었습니다. 프로그램과 내 스케줄은 계속 열람할 수 있습니다.',
+        startsInMin: '분 후 시작',
+        simPreview: '▶ 진행중 미리보기',
+        simExit: '✕ 현재시간 복귀',
+        simTag: '시뮬레이션',
         conflict: '시간 겹침',
         details: '상세 ›',
         days: {
@@ -935,7 +1287,32 @@
         shuttleDrop: '하차: 하얏트 리젠시 인천 / 파라다이스시티',
         officialTitle: '공식 홈페이지 및 사무국',
         openWeb: '공식 홈페이지 ↗',
-        emailSec: '사무국 메일'
+        emailSec: '사무국 메일',
+        ddayLive: '행사 진행 중',
+        ddayDone: '행사 종료',
+        ddayTitle: 'HUG 2027 개막까지',
+        ddaySub: '3일간 15개 학술·교류 세션 · 한·일 공동 심포지엄',
+        glanceTitle: '📅 일정 한눈에 보기',
+        viewAll: '전체 보기 ›',
+        glanceD1Title: 'H. pylori 최신 지견 · KCHUGR–KGCA 공동',
+        glanceD1Sub: '13:00 등록 시작 · 4개 세션',
+        glanceD2Title: '제23회 한·일 공동 심포지엄 · 30주년 갈라 디너',
+        glanceD2Sub: '09:00 시작 · YIA 시상식 · 7개 세션',
+        glanceD3Title: 'Plenary 기조강연 · 조기발병 위암',
+        glanceD3Sub: '09:00 시작 · 정기총회 · 4개 세션',
+        featuredTitle: '✨ 주요 하이라이트 세션',
+        deadlinesTitle: '🗓 주요 마감 일정',
+        dl1Label: '초록 접수 마감',
+        dl1Date: '2027. 01. 11 (월)',
+        dl2Label: '초록 채택 통보',
+        dl2Date: '2027. 02. 01 (월)',
+        dl3Label: '사전 등록 마감',
+        dl3Date: '2027. 02. 18 (목)',
+        homeVenueTitle: '📍 행사장 및 공식 안내',
+        homeVenueNote: '인천공항 T1/T2 무료 셔틀버스 운행 (약 15~20분 간격)',
+        goVenueBtn: '교통 · 지도 안내',
+        footerOrg: '주최: 대한상부위장관·헬리코박터학회 (KCHUGR)',
+        footerCopy: 'HUG 2027 · The International Symposium on Helicobacter and Upper GI Diseases'
       },
       en: {
         navHome: 'Home',
@@ -959,6 +1336,15 @@
         trackKJ: 'Korea-Japan',
         trackSpec: 'Plenary / Joint',
         kjBadge: 'Korea-Japan',
+        liveNow: 'LIVE NOW',
+        upNext: 'UP NEXT',
+        beforeEvent: 'UPCOMING',
+        afterEvent: 'CONCLUDED',
+        afterEventMsg: 'HUG 2027 has concluded. You can still browse the program and your saved schedule.',
+        startsInMin: ' min left',
+        simPreview: '▶ Preview Live',
+        simExit: '✕ Exit Preview',
+        simTag: 'Demo',
         conflict: 'Time Conflict',
         details: 'Details ›',
         days: {
@@ -1000,7 +1386,32 @@
         shuttleDrop: 'Stop: Hyatt Regency Incheon / Paradise City',
         officialTitle: 'Official Website & Secretariat',
         openWeb: 'Official Website ↗',
-        emailSec: 'Email Secretariat'
+        emailSec: 'Email Secretariat',
+        ddayLive: 'LIVE NOW',
+        ddayDone: 'COMPLETED',
+        ddayTitle: 'Countdown to HUG 2027',
+        ddaySub: '3 Days · 15 Sessions · 23rd Korea–Japan Joint Symposium',
+        glanceTitle: '📅 Program at a Glance',
+        viewAll: 'View All ›',
+        glanceD1Title: 'H. pylori Updates · KCHUGR–KGCA Joint',
+        glanceD1Sub: 'Starts 13:00 · 4 Sessions',
+        glanceD2Title: '23rd Korea–Japan Joint · 30th Gala Dinner',
+        glanceD2Sub: 'Starts 09:00 · YIA Ceremony · 7 Sessions',
+        glanceD3Title: 'Plenary Session · Early-Onset Gastric Cancer',
+        glanceD3Sub: 'Starts 09:00 · General Assembly · 4 Sessions',
+        featuredTitle: '✨ Featured Sessions',
+        deadlinesTitle: '🗓 Important Dates',
+        dl1Label: 'Abstract Submission',
+        dl1Date: 'Jan 11, 2027',
+        dl2Label: 'Acceptance Notice',
+        dl2Date: 'Feb 1, 2027',
+        dl3Label: 'Pre-Registration',
+        dl3Date: 'Feb 18, 2027',
+        homeVenueTitle: '📍 Venue & Quick Links',
+        homeVenueNote: 'Free Incheon Airport Shuttle from T1 & T2 (every 15–20 min)',
+        goVenueBtn: 'Venue & Shuttle',
+        footerOrg: 'Organized by KCHUGR (Korean College of Helicobacter and Upper GI Research)',
+        footerCopy: 'HUG 2027 · The International Symposium on Helicobacter and Upper GI Diseases'
       }
     };
 
@@ -1176,6 +1587,165 @@
       return h * 60 + m;
     }
 
+    // --- Real-Time Schedule Detection (KST / Asia/Seoul) ---
+    const DAY_DATES = { 1: '2027-03-18', 2: '2027-03-19', 3: '2027-03-20' };
+    let simLiveMode = false;
+
+    function getCurrentKstParts() {
+      if (simLiveMode) {
+        return { dateStr: '2027-03-19', hhmm: '13:45', mins: 13 * 60 + 45 };
+      }
+      const now = new Date();
+      try {
+        const parts = new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'Asia/Seoul',
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit', hour12: false
+        }).formatToParts(now);
+        const map = {};
+        parts.forEach((p) => { map[p.type] = p.value; });
+        const h = Number(map.hour === '24' ? '0' : map.hour);
+        const m = Number(map.minute);
+        return {
+          dateStr: `${map.year}-${map.month}-${map.day}`,
+          hhmm: `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`,
+          mins: h * 60 + m
+        };
+      } catch (_) {
+        const y = now.getFullYear(), mo = String(now.getMonth() + 1).padStart(2, '0'), d = String(now.getDate()).padStart(2, '0');
+        const h = now.getHours(), m = now.getMinutes();
+        return { dateStr: `${y}-${mo}-${d}`, hhmm: `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`, mins: h * 60 + m };
+      }
+    }
+
+    function getLiveState() {
+      const kst = getCurrentKstParts();
+      const activeDay = Number(Object.keys(DAY_DATES).find((k) => DAY_DATES[k] === kst.dateStr)) || 0;
+
+      if (activeDay > 0) {
+        const todaySessions = SESSIONS.filter((s) => s.day === activeDay).sort((a, b) => toMin(a.start) - toMin(b.start));
+        const liveNow = todaySessions.filter((s) => kst.mins >= toMin(s.start) && kst.mins < toMin(s.end));
+        if (liveNow.length > 0) return { status: 'LIVE', day: activeDay, kst, items: liveNow };
+        const upNext = todaySessions.filter((s) => toMin(s.start) > kst.mins);
+        if (upNext.length > 0) {
+          const nextStart = upNext[0].start;
+          return { status: 'UP_NEXT', day: activeDay, kst, items: upNext.filter((s) => s.start === nextStart), diffMin: toMin(nextStart) - kst.mins };
+        }
+        if (activeDay < 3) {
+          const tomorrowFirst = SESSIONS.filter((s) => s.day === activeDay + 1).sort((a, b) => toMin(a.start) - toMin(b.start))[0];
+          return { status: 'UP_NEXT', day: activeDay + 1, kst, items: tomorrowFirst ? [tomorrowFirst] : [], diffMin: null };
+        }
+        return { status: 'AFTER', day: 3, kst, items: [] };
+      }
+
+      if (kst.dateStr < DAY_DATES[1]) {
+        const d1 = new Date(DAY_DATES[1] + 'T00:00:00+09:00');
+        const dn = new Date(kst.dateStr + 'T00:00:00+09:00');
+        const dday = Math.max(1, Math.round((d1 - dn) / 86400000));
+        return { status: 'BEFORE', day: 1, kst, dday, items: [SESSIONS[1]] };
+      }
+      return { status: 'AFTER', day: 3, kst, items: [] };
+    }
+
+    function toggleSimLive() {
+      simLiveMode = !simLiveMode;
+      if (simLiveMode) selectedDay = 2;
+      render();
+    }
+
+    function renderLiveWidget() {
+      const t = T[lang];
+      const st = getLiveState();
+      const simBtnHtml = simLiveMode
+        ? `<button class="sim-btn" onclick="toggleSimLive()">${t.simExit}</button>`
+        : (st.status === 'BEFORE' || st.status === 'AFTER' ? `<button class="sim-btn" onclick="toggleSimLive()">${t.simPreview}</button>` : '');
+
+      if (st.status === 'LIVE') {
+        return `
+          <section class="live-card">
+            <div class="live-header">
+              <span class="live-pill"><span class="live-dot"></span> ${t.liveNow}${simLiveMode ? ` · ${t.simTag}` : ''}</span>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span class="live-clock">${t.days[st.day].date} ${st.kst.hhmm}</span>
+                ${simBtnHtml}
+              </div>
+            </div>
+            ${st.items.map((s) => {
+              const total = Math.max(1, toMin(s.end) - toMin(s.start));
+              const pct = Math.min(100, Math.max(5, Math.round(((st.kst.mins - toMin(s.start)) / total) * 100)));
+              return `
+                <div class="live-item" onclick="openDetail('${s.id}')">
+                  <div class="live-item-title">${s.title}</div>
+                  <div class="live-item-meta">
+                    <span>🕒 ${s.start}–${s.end}</span>
+                    <span>📍 ${s.room}</span>
+                  </div>
+                  <div class="live-progress"><div class="live-progress-bar" style="width:${pct}%;"></div></div>
+                </div>
+              `;
+            }).join('')}
+          </section>
+        `;
+      }
+
+      if (st.status === 'UP_NEXT' && st.items.length) {
+        return `
+          <section class="live-card upcoming">
+            <div class="live-header">
+              <span class="live-pill next">⏳ ${t.upNext}${st.diffMin ? ` · ${st.diffMin}${t.startsInMin}` : ''}</span>
+              <span class="live-clock">${st.kst.hhmm}</span>
+            </div>
+            ${st.items.map((s) => `
+              <div class="live-item next-item" onclick="openDetail('${s.id}')">
+                <div class="live-item-title">${s.title}</div>
+                <div class="live-item-meta">
+                  <span>🕒 ${t.days[s.day].date} ${s.start}–${s.end}</span>
+                  <span>📍 ${s.room}</span>
+                </div>
+              </div>
+            `).join('')}
+          </section>
+        `;
+      }
+
+      if (st.status === 'BEFORE') {
+        const first = st.items[0];
+        return `
+          <section class="live-card upcoming">
+            <div class="live-header">
+              <span class="live-pill dday">D-${st.dday} · ${t.beforeEvent}</span>
+              ${simBtnHtml}
+            </div>
+            <div class="live-item next-item" onclick="openDetail('${first.id}')">
+              <div class="live-item-title">${first.title}</div>
+              <div class="live-item-meta">
+                <span>🕒 ${t.days[first.day].date} ${first.start}–${first.end}</span>
+                <span>📍 ${first.room}</span>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      return `
+        <section class="live-card upcoming">
+          <div class="live-header">
+            <span class="live-pill dday">✓ ${t.afterEvent}</span>
+            ${simBtnHtml}
+          </div>
+          <div style="font-size:12.5px;color:#455A64;line-height:1.45;">${t.afterEventMsg}</div>
+        </section>
+      `;
+    }
+
+    (function initDayByClock() {
+      const st = getLiveState();
+      if (st.status === 'LIVE' || st.status === 'UP_NEXT') {
+        selectedDay = st.day;
+        mySelectedDay = st.day;
+      }
+    })();
+
     function hasConflict(item, dayItems) {
       const s1 = toMin(item.start), e1 = toMin(item.end);
       return dayItems.some((o) => o.id !== item.id && s1 < toMin(o.end) && toMin(o.start) < e1);
@@ -1311,12 +1881,35 @@
     function setMyDay(d) { mySelectedDay = d; render(); }
     function setTrackFilter(tr) { trackFilter = tr; render(); }
 
+    function getDDayBadge(t) {
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const start = new Date(2027, 2, 18); // Mar 18, 2027
+      const end = new Date(2027, 2, 20);   // Mar 20, 2027
+      const diffDays = Math.round((start - today) / 86400000);
+      if (diffDays > 0) return `D-${diffDays}`;
+      if (today <= end) return t.ddayLive;
+      return t.ddayDone;
+    }
+
+    function jumpToProgramDay(day) {
+      selectedDay = day;
+      trackFilter = 'ALL';
+      searchQuery = '';
+      switchTab('program');
+    }
+
     function renderBodyOnly() {
       const t = T[lang];
       const main = document.getElementById('mainContent');
 
-      // HOME SCREEN — Minimal & Clean (No Hotel Photo)
+      // HOME SCREEN
       if (currentTab === 'home') {
+        const featuredIds = ['h1-kgca', 'h2-kj1', 'h3-plenary'];
+        const featuredSessions = featuredIds
+          .map((id) => SESSIONS.find((s) => s.id === id))
+          .filter(Boolean);
+
         main.innerHTML = `
           <div class="home-wrap">
             <section class="home-hero">
@@ -1324,6 +1917,8 @@
               <div class="home-hero-theme">Helicobacter &amp; Upper GI Diseases<br/>23rd Korea-Japan Joint Symposium</div>
               <div class="home-hero-meta">${t.homeMeta}</div>
             </section>
+
+            ${renderLiveWidget()}
 
             <!-- 3 Core Icon Tiles: Program, My Schedule, Info -->
             <section class="home-menu-grid">
@@ -1362,6 +1957,132 @@
                 <div class="home-tile-label">${t.tileInfo}</div>
               </button>
             </section>
+
+            <!-- D-Day & Overview Strip -->
+            <section class="home-dday-card">
+              <div class="dday-left">
+                <span class="dday-pill">${getDDayBadge(t)}</span>
+                <div style="min-width:0;">
+                  <div class="dday-title">${t.ddayTitle}</div>
+                  <div class="dday-sub">${t.ddaySub}</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Program at a Glance (Day 1–3 Quick Jump) -->
+            <section class="home-card">
+              <div class="home-card-head">
+                <div class="home-card-title">${t.glanceTitle}</div>
+                <button class="home-link-btn" onclick="switchTab('program')">${t.viewAll}</button>
+              </div>
+              <div class="glance-list">
+                <button class="glance-row" onclick="jumpToProgramDay(1)">
+                  <div class="glance-day-badge">
+                    <div class="glance-day-num">${t.days[1].short}</div>
+                    <div class="glance-day-date">${t.days[1].date}</div>
+                  </div>
+                  <div class="glance-body">
+                    <div class="glance-title">${t.glanceD1Title}</div>
+                    <div class="glance-sub">${t.glanceD1Sub}</div>
+                  </div>
+                  <span class="glance-chevron">›</span>
+                </button>
+                <button class="glance-row" onclick="jumpToProgramDay(2)">
+                  <div class="glance-day-badge d2">
+                    <div class="glance-day-num">${t.days[2].short}</div>
+                    <div class="glance-day-date">${t.days[2].date}</div>
+                  </div>
+                  <div class="glance-body">
+                    <div class="glance-title">${t.glanceD2Title}</div>
+                    <div class="glance-sub">${t.glanceD2Sub}</div>
+                  </div>
+                  <span class="glance-chevron">›</span>
+                </button>
+                <button class="glance-row" onclick="jumpToProgramDay(3)">
+                  <div class="glance-day-badge d3">
+                    <div class="glance-day-num">${t.days[3].short}</div>
+                    <div class="glance-day-date">${t.days[3].date}</div>
+                  </div>
+                  <div class="glance-body">
+                    <div class="glance-title">${t.glanceD3Title}</div>
+                    <div class="glance-sub">${t.glanceD3Sub}</div>
+                  </div>
+                  <span class="glance-chevron">›</span>
+                </button>
+              </div>
+            </section>
+
+            <!-- Featured Sessions -->
+            <section class="home-card">
+              <div class="home-card-head">
+                <div class="home-card-title">${t.featuredTitle}</div>
+                <button class="home-link-btn" onclick="switchTab('program')">${t.viewAll}</button>
+              </div>
+              <div class="featured-list">
+                ${featuredSessions.map((s) => {
+                  const isSaved = savedIds.has(s.id);
+                  return `
+                    <article class="featured-item tone-${s.tone}" onclick="openDetail('${s.id}')">
+                      <div style="min-width:0;flex:1;">
+                        <div class="featured-meta">
+                          <span>${t.days[s.day].short} · ${s.start}–${s.end}</span>
+                          <span class="cat-badge">${s.category}</span>
+                        </div>
+                        <div class="featured-title">${s.title}</div>
+                      </div>
+                      <button class="star-btn ${isSaved ? 'saved' : ''}" onclick="toggleSave('${s.id}', event)" aria-label="Bookmark">
+                        ${isSaved ? '★' : '☆'}
+                      </button>
+                    </article>
+                  `;
+                }).join('')}
+              </div>
+            </section>
+
+            <!-- Important Dates -->
+            <section class="home-card">
+              <div class="home-card-head">
+                <div class="home-card-title">${t.deadlinesTitle}</div>
+              </div>
+              <div class="deadline-list">
+                <div class="deadline-row">
+                  <span class="deadline-label">${t.dl1Label}</span>
+                  <span class="deadline-date">${t.dl1Date}</span>
+                </div>
+                <div class="deadline-row">
+                  <span class="deadline-label">${t.dl2Label}</span>
+                  <span class="deadline-date">${t.dl2Date}</span>
+                </div>
+                <div class="deadline-row">
+                  <span class="deadline-label">${t.dl3Label}</span>
+                  <span class="deadline-date">${t.dl3Date}</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- Venue & Quick Links -->
+            <section class="home-card">
+              <div class="home-card-head">
+                <div class="home-card-title">${t.homeVenueTitle}</div>
+              </div>
+              <div class="home-venue-strip">
+                <div class="home-venue-info">
+                  <b>${t.venueName}</b><br/>
+                  ${t.venueAddr}<br/>
+                  🚌 ${t.homeVenueNote}
+                </div>
+                <div class="btn-grid" style="margin-top:0;">
+                  <button class="action-btn action-primary" onclick="switchTab('venue')">🗺 ${t.goVenueBtn}</button>
+                  <a class="action-btn action-soft" target="_blank" rel="noopener" href="https://www.helicobacterkorea.org">${t.openWeb}</a>
+                </div>
+              </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="home-footer">
+              <div><b>${t.footerOrg}</b></div>
+              <div>${t.footerCopy}</div>
+            </footer>
           </div>
         `;
         return;
@@ -1387,16 +2108,21 @@
           </div>
         ` : '';
 
+        const liveState = getLiveState();
+        const liveIdSet = new Set(liveState.status === 'LIVE' ? liveState.items.map((x) => x.id) : []);
+
         main.innerHTML = searchBanner + (list.length ? `
           <div class="session-list">
             ${list.map((s) => {
               const isSaved = savedIds.has(s.id);
+              const isLive = liveIdSet.has(s.id);
               const matchedTalks = isSearching ? s.talks.filter((tk) => tk.toLowerCase().includes(q)) : [];
               const matchedChair = isSearching && s.chairs && s.chairs.toLowerCase().includes(q);
               return `
-                <article class="session-card tone-${s.tone} ${isSaved ? 'saved' : ''}" onclick="openDetail('${s.id}')">
+                <article class="session-card tone-${s.tone} ${isSaved ? 'saved' : ''} ${isLive ? 'is-live' : ''}" onclick="openDetail('${s.id}')">
                   <div class="card-top">
                     <div class="badges">
+                      ${isLive ? `<span class="live-inline-badge"><span class="live-dot"></span> ${t.liveNow}</span>` : ''}
                       ${isSearching ? `<span class="cat-badge" style="background:#162B5B;color:#FFF;border:none;">${t.days[s.day].date}</span>` : ''}
                       <span class="time-badge">${s.start}–${s.end}</span>
                       <span class="cat-badge">${s.category}</span>
@@ -1655,6 +2381,9 @@
 
     render();
     updateInstallBanner();
+    setInterval(() => {
+      if (currentTab === 'home' || currentTab === 'program') renderBodyOnly();
+    }, 60000);
   </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hug2027-v1';
+const CACHE_NAME = 'hug2027-v3';
 const ASSETS = [
   './',
   './index.html',
