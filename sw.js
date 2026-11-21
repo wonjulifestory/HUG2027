@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hug2027-v6';
+const CACHE_NAME = 'hug2027-v7';
 const ASSETS = [
   './',
   './index.html',
@@ -7,7 +7,8 @@ const ASSETS = [
   './assets/icon-512.png',
   './assets/apple-touch-icon.png',
   './assets/favicon.png',
-  './assets/logo_hug2027.png'
+  './assets/logo_hug2027.png',
+  './assets/home_visual.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -42,5 +43,6 @@ self.addEventListener('fetch', (event) => {
       .catch(() => caches.match(event.request).then((c) => c || caches.match('./index.html')))
   );
 });
+
 
 
